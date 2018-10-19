@@ -1,0 +1,42 @@
+一、bag基本操作指令
+
+$rosbag record -a
+
+-all 保存所有的话题
+
+$rosbag record  -O  w   /turtle1/cmd_vel  
+
+接收话题 /turtle1/cmd_vel  的数据包，并命名为w.bag
+
+$rosbag info <bag>
+
+显示包的详细信息
+
+$rosbag play <bag>
+
+播放bag包
+
+$rosbag play -r 2 <bag>
+
+以2Hz的频率播放bag 包
+
+二、bag_to_pcd
+
+（1）从bag包转pcd
+
+$ rosrun pcl_ros bag_to_pcd <input_file.bag> <topic> <output_directory>
+$ rosrun pcl_ros bag_to_pcd data.bag /velodyne_points ./wtj
+
+从data.bag中提取/velodyne_points 话题数据到wtj 文件夹中。
+
+(2)  通过发布，订阅实时转
+
+检查topic:rosbag info XXX.bag
+发送message: $ rosbag play XXX.bag
+订阅需要的话题:$rosrun pcl_ros pointcloud_to_pcd input:=/velodyne_points
+
+在当前目录下将话题实时转为pcd文件。
+
+(3)显示生成的pcd文件
+
+$pcl_viewer  1513648255448748.pcd
