@@ -7,3 +7,6 @@
 
 for apollo by kit
 https://gitlab.moonx.cn:16666/Developers/apollo/merge_requests/281/diffs?diff_id=631#f283ff22318ffd4284cc618cb1ad05380dbb419a_0_27
+
+./bag2image --bag_file 2018-10-11-14-33-15.bag --output_folder optpicture/
+
