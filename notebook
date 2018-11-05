@@ -11,5 +11,6 @@ make: *** [all] Error 2
 
 原因猜测,找的opencv库是ros kinetic的库里面有点小问题
 两个解决方案
+//方案一没啥用,直接用2吧
 1.自己set()opencv路径
 2.在add_executable前加list(REMOVE_ITEM PCL_LIBRARIES "vtkproj4")
