@@ -1,0 +1,178 @@
+   (1)学习向PCD文件写入点云数据
+
+             建立工程文件ch2,然后新建write_pcd.cpp  CMakeLists.txt两个文件
+
+  write_pcd.cpp :
+
+#include <iostream>              //标准C++库中的输入输出的头文件
+#include <pcl/io/pcd_io.h>           //PCD读写类相关的头文件
+#include <pcl/point_types.h>      //PCL中支持的点类型的头文件
+
+int
+  main (int argc, char** argv)
+{
+  //实例化的模板类PointCloud  每一个点的类型都设置为pcl::PointXYZ
+/*************************************************
+ 点PointXYZ类型对应的数据结构
+    Structure PointXYZ{
+     float x;
+     float y;
+     float z;
+    };
+**************************************************/
+  pcl::PointCloud<pcl::PointXYZ> cloud;
+
+  // 创建点云  并设置适当的参数（width height is_dense）
+  cloud.width    = 5;
+  cloud.height   = 1;
+  cloud.is_dense = false;  //不是稠密型的
+  cloud.points.resize (cloud.width * cloud.height);  //点云总数大小
+   //用随机数的值填充PointCloud点云对象 
+  for (size_t i = 0; i < cloud.points.size (); ++i)
+  {
+    cloud.points[i].x = 1024 * rand () / (RAND_MAX + 1.0f);
+    cloud.points[i].y = 1024 * rand () / (RAND_MAX + 1.0f);
+    cloud.points[i].z = 1024 * rand () / (RAND_MAX + 1.0f);
+  }
+  //把PointCloud对象数据存储在 test_pcd.pcd文件中
+  pcl::io::savePCDFileASCII ("test_pcd.pcd", cloud);
+  
+//打印输出存储的点云数据
+  std::cerr << "Saved " << cloud.points.size () << " data points to test_pcd.pcd." << std::endl;
+
+  for (size_t i = 0; i < cloud.points.size (); ++i)
+    std::cerr << "    " << cloud.points[i].x << " " << cloud.points[i].y << " " << cloud.points[i].z << std::endl;
+
+  return (0);
+}
+
+ 
+
+CMakeLists.txt：（第一次接触CMake所以注释的比较多，废话比较多，所以有助于理解）
+
+cmake_minimum_required ( VERSION 2.6 FATAL_ERROR)   #对于cmake版本的最低版本的要求
+project(ch2)                                        #建立的工程名，例如源代码目录路径的变量名为CH_DIR
+                                                    #工程存储目录变量名为CH_BINARY_DIR
+#要求工程依赖的PCL最低版本为1.3，并且版本至少包含common和IO两个模块  这里的REQUIRED意味着如果对应的库找不到 则CMake配置的过程将完全失败，
+#因为PCL是模块化的，也可以如下操作：
+#           一个组件  find_package(PCL 1.6 REQUIRED COMPONENTS  io)
+#           多个组件  find_package(PCL 1.6 REQUIRED COMPONENTS commom io)
+#           所有组件  find_package(PCL 1.6 REQUIRED )                    
+find_package(PCL 1.3 REQUIRED)  
+
+
+#下面的语句是利用CMake的宏完成对PCL的头文件路径和链接路径变量的配置和添加，如果缺少下面几行，生成文件的过程中就会提示
+#找不到相关的头文件，在配置CMake时，当找到了安装的PCL，下面相关的包含的头文件，链接库，路径变量就会自动设置
+#                    PCL_FOUND:如果找到了就会被设置为1 ，否则就不设置
+#                    PCL_INCLUDE_DIRS:被设置为PCL安装的头文件和依赖头文件的目录
+#                    PCL_LIBRARIES:被设置成所建立和安装的PCL库头文件
+#                    PCL_LIBRARIES_DIRS:被设置成PCL库和第三方依赖的头文件所在的目录
+#                    PCL_VERSION:所找到的PCL的版本
+#                    PCL_COMPONENTS:列出所有可用的组件
+#                    PCL_DEFINITIONS:列出所需要的预处理器定义和编译器标志
+include_directories(${PCL_INCLUDE_DIRS})
+link_directories(${PCL_LIBRARIES_DIRS})
+add_definitions(${PCL_DEFINITIONS})
+
+#这句话告诉CMake从单个源文件write_pcd建立一个可执行文件
+add_executable(write_pcd write_pcd.cpp)
+#虽然包含了PCL的头文件，因此编译器知道我们现在访问所用的方法，我们也需要让链接器知道所链接的库，PCL找到库文件由
+#PCL_COMMON_LIBRARIES变量指示，通过target_link_libraries这个宏来出发链接操作
+target_link_libraries(write_pcd ${PCL_COMMON_LIBRARIES} ${PCL_IO_LIBRARIES})
+ 
+
+之后就 cd   到文件下
+
+                   mkdir  build
+
+                   cd build
+
+ 
+
+                   cmake ..
+
+                   make
+
+生成可执行文件后执行的结果：
+
+ 
+
+（2）学习如何从PCD文件读取点云数据
+
+读取PCD点云数据只需在工程文件下建立新的文件write_pcd.cpp
+
+write.cpp:
+
+#include <iostream>              //标准C++库中的输入输出的头文件
+#include <pcl/io/pcd_io.h>       //PCD读写类相关的头文件
+#include <pcl/point_types.h>     //PCL中支持的点类型的头文件
+
+int
+main (int argc, char** argv)
+{ 
+   //创建一个PointCloud<pcl::PointXYZ>    boost共享指针并进行实例化
+  pcl::PointCloud<pcl::PointXYZ>::Ptr cloud (new pcl::PointCloud<pcl::PointXYZ>);
+  
+  //打开点云文件
+  if (pcl::io::loadPCDFile<pcl::PointXYZ> ("test_pcd.pcd", *cloud) == -1) 
+  {
+    PCL_ERROR ("Couldn't read file test_pcd.pcd \n");
+    return (-1);
+  }
+//默认就是而二进制块读取转换为模块化的PointCLoud格式里pcl::PointXYZ作为点类型  然后打印出来
+  std::cout << "Loaded "
+            << cloud->width * cloud->height
+            << " data points from test_pcd.pcd with the following fields: "
+            << std::endl;
+  for (size_t i = 0; i < cloud->points.size (); ++i)
+    std::cout << "    " << cloud->points[i].x
+              << " "    << cloud->points[i].y
+              << " "    << cloud->points[i].z << std::endl;
+
+  return (0);
+}
+
+ 
+
+那么要编译此文件只需在CMakeLists.txt最下面添加两行代码
+
+add_executable(write_pcd write_pcd.cpp)
+add_executable(read_pcd read_pcd.cpp)
+target_link_libraries(write_pcd ${PCL_COMMON_LIBRARIES} ${PCL_IO_LIBRARIES})
+target_link_libraries(read_pcd ${PCL_COMMON_LIBRARIES} ${PCL_IO_LIBRARIES})
+
+编译后执行的结果如下
+
+ 
+
+ 如果想看PCD文件的数据，可以找到test_pcd.pcd后缀名改为.txt即可打开如下所示：
+
+(仔细查看文件头 的顺序也就是之前介绍的文件头顺序)
+
+# .PCD v0.7 - Point Cloud Data file format
+VERSION 0.7
+FIELDS x y z
+SIZE 4 4 4
+TYPE F F F
+COUNT 1 1 1
+WIDTH 5
+HEIGHT 1
+VIEWPOINT 0 0 0 1 0 0 0
+POINTS 5
+DATA ascii
+0.35222197 -0.15188313 -0.10639524
+-0.3974061 -0.47310591 0.29260206
+-0.73189831 0.66710472 0.44130373
+-0.73476553 0.85458088 -0.036173344
+-0.46070004 -0.2774682 -0.91676188
+
+总结
+
+pcl::PointCloud<pcl::PointXYZ> cloud ;  //写入点云数据的声明，就是三个float类型的数据，
+
+pcl::PointCloud<pcl::PointXYZ>::Ptr cloud (new pcl::PointCloud<pcl::PointXYZ>);这是声明的数据类型，用来存储我们打开的点云数据格式，是共享指针类型
+--------------------- 
+作者：Being_young 
+来源：CSDN 
+原文：https://blog.csdn.net/u013019296/article/details/70052303 
+版权声明：本文为博主原创文章，转载请附上博文链接！
