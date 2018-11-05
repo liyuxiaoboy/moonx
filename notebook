@@ -1,0 +1,15 @@
+在牵扯到pcl库的时候make基本会出现
+
+/usr/bin/ld: 找不到 -lvtkproj4
+collect2: error: ld returned 1 exit status
+CMakeFiles/pcd2depth.dir/build.make:409: recipe for target 'pcd2depth' failed
+make[2]: *** [pcd2depth] Error 1
+CMakeFiles/Makefile2:67: recipe for target 'CMakeFiles/pcd2depth.dir/all' failed
+make[1]: *** [CMakeFiles/pcd2depth.dir/all] Error 2
+Makefile:83: recipe for target 'all' failed
+make: *** [all] Error 2
+
+原因猜测,找的opencv库是ros kinetic的库里面有点小问题
+两个解决方案
+1.自己set()opencv路径
+2.在add_executable前加list(REMOVE_ITEM PCL_LIBRARIES "vtkproj4")
