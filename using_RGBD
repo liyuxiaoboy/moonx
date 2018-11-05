@@ -1,0 +1,2 @@
+#先用apollo做出来pcd图
+/home/yxli/apollo/scripts msf_simple_map_creator.sh
