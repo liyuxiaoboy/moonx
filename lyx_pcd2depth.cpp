@@ -1,4 +1,5 @@
 #src
+//
 // Created by yxli on 18-11-6.
 //
 
@@ -167,7 +168,7 @@ int main(int argc, char **argv)
     tVec.at<double>(1) = 0;
     tVec.at<double>(2) = 0;
 
-    cv::Mat distCoeffs(5, 1, cv::DataType<double>::type); // Distortion vector
+    cv::Mat distCoeffs(5, 1, cv::DataType<double>::type); // Distortion vector 畸变校正
     distCoeffs.at<double>(0) = -0.546301;
     distCoeffs.at<double>(1) = 0.273115;
     distCoeffs.at<double>(2) = 0.005977;
@@ -176,27 +177,29 @@ int main(int argc, char **argv)
 
     cv::Mat image;
     std::vector<cv::Point2d> imagePoints;
-
+    std::vector<std::string> associate;
     auto img_iter = img_map.begin();
     for (auto pcd_iter = pcd_map.begin(); pcd_iter != pcd_map.end(); pcd_iter++)
     {
         long img_time;
+        //找到最临近的图片
         if (!getClosestImage(pcd_iter->first, img_map, img_iter, img_time))
             continue;
-
+        //读入pcl文件
         cv::Mat img;
         pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_src(new pcl::PointCloud<pcl::PointXYZ>);
         pcl::io::loadPCDFile<pcl::PointXYZ>(pcd_iter->second, *cloud_src);
-
-
+        //把pcl坐标转移到相机坐标这个是提前标定好的
         pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_cam(new pcl::PointCloud<pcl::PointXYZ>);
         pcl::transformPointCloud(*cloud_src, *cloud_cam, trans_pcd_img);
-
+        //把3d点云信息提取出来
         std::vector<cv::Point3d> objectPoints = get3DPoints(cloud_cam);
         cv::projectPoints(objectPoints, rVec, tVec, intrisicMat, distCoeffs, imagePoints);
-
+        //开张图用来存深度点
         image = cv::imread(img_map[img_time], CV_LOAD_IMAGE_COLOR);
+        //这里用CV_32FC1来存就能有小数了可惜杨老师的程序还是给抹去了
         cv::Mat depth_2 = cv::Mat::zeros(image.rows, image.cols, CV_32FC1);
+        
         int k=0;
         std::vector<int> obstacle_id;
         for (int i = 0; i < imagePoints.size(); i++)
@@ -206,10 +209,10 @@ int main(int argc, char **argv)
             auto x = cloud_cam->points[i].x;
             auto y = cloud_cam->points[i].y;
             auto z = cloud_cam->points[i].z;
-
+            //负数说明不在一个平面上
             if (z <= 0)
                 continue;
-
+            //往图片上加深度信息
             if (col >= 0 && col < image.cols && row >= 0 && row < image.rows)
             {
                 if (depth_2.at<float>(row, col) == 0)
@@ -219,6 +222,7 @@ int main(int argc, char **argv)
                     depth_2.at<float>(row, col) = sqrt(x * x + y * y + z * z);
 
                 }
+                //算一下提了几个点
                 if(depth_2.at<float>(row, col)!=0)
                 {++k;}
             }
@@ -235,12 +239,21 @@ int main(int argc, char **argv)
         cv::imwrite(output_pcd_path + opt_pcd + ".pgm", depth_2);
         cv::imwrite(output_img_path + opt_img + ".ppm", image);
 
+        associate.push_back(opt_img + " " + "rgb/" + opt_img + ".png" + " " + opt_pcd + " " + "depth/" + opt_pcd + ".png");
 
     }
-
+    //输出一个匹配好的txt文件
+    std::ofstream out( output_img_path+"img_timestamps.txt");
+    for (auto line : associate) {
+        if (out.is_open()) {
+            out << line << "\n";
+        }
+    }
+    out.close();
 
     return 0;
 }
+
 
 #CMAKELISTS
 cmake_minimum_required(VERSION 2.8 FATAL_ERROR)
