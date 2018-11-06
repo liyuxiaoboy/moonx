@@ -1,3 +1,9 @@
+在orbslam中跑TUM数据集用的是下面的输入参数
+/home/yxli/ORB_SLAM2-master/Vocabulary/ORBvoc.txt
+/home/yxli/ORB_SLAM2-master/Examples/RGB-D/TUM1.yaml
+/home/yxli/dataset/rgbd_dataset_freiburg1_desk
+/home/yxli/dataset/rgbd_dataset_freiburg1_desk/associate.txt
+
 #前两步要在apollo使用
 cd ~/apollo
 bash docker/canary/start.sh
