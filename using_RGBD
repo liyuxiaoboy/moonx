@@ -1,2 +1,4 @@
 #先用apollo做出来pcd图
 /home/yxli/apollo/scripts msf_simple_map_creator.sh
+#提取出来车图片
+/home/yxli/apollo/bazel-bin/modules/map/util/colored_pointcloud
