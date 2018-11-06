@@ -4,6 +4,12 @@
 /home/yxli/dataset/rgbd_dataset_freiburg1_desk
 /home/yxli/dataset/rgbd_dataset_freiburg1_desk/associate.txt
 
+/home/yxli/ORB_SLAM2-master/Vocabulary/ORBvoc.txt
+/home/yxli/roswork/Experimental_material/camera_short.yaml
+/home/yxli/roswork/Experimental_material/test
+/home/yxli/roswork/Experimental_material/test/img_timestamps.txt
+
+
 #前两步要在apollo使用
 cd ~/apollo
 bash docker/canary/start.sh
