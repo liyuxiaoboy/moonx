@@ -11,7 +11,11 @@ bash scripts/msf_simple_map_creator.sh bazel-bin/modules/map/util/colored_pointc
 cd bazel-bin/modules/map/util/colored_pointcloud
 ./bag2image --bag_file 2018-10-11-14-33-15.bag --output_folder optpicture/
 
+#把提取的图片信息pcd转移到~/roswork/Experimental_material/下面
+
 #把pcd提取成深度点云图在这一过程中要找到最近临点
+cd /home/yxli/roswork/pcd2depth/cmake-build-debug
+./lyx_pcd2depth
 /home/yxli/roswork/Experimental_material/pcd/pcd_timestamp.txt 
 /home/yxli/roswork/Experimental_material/optpicture/img_timestamps.txt 
 /home/yxli/roswork/Experimental_material/depth/ 
