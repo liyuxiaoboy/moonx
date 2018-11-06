@@ -1,3 +1,4 @@
+#前两步要在apollo使用
 cd ~/apollo
 bash docker/canary/start.sh
 bash docker/canary/dev_into.sh
@@ -9,6 +10,11 @@ bash scripts/msf_simple_map_creator.sh bazel-bin/modules/map/util/colored_pointc
 #提取出来车图片
 cd bazel-bin/modules/map/util/colored_pointcloud
 ./bag2image --bag_file 2018-10-11-14-33-15.bag --output_folder optpicture/
-#把pcd提取成深度点云图
+
+#把pcd提取成深度点云图在这一过程中要找到最近临点
+/home/yxli/roswork/Experimental_material/pcd/pcd_timestamp.txt 
+/home/yxli/roswork/Experimental_material/optpicture/img_timestamps.txt 
+/home/yxli/roswork/Experimental_material/depth/ 
+/home/yxli/roswork/Experimental_material/img/
 
 #把深度点云图变成深度图
