@@ -1,0 +1,80 @@
+#include <boost/filesystem.hpp>
+#include <iostream>
+#include <string>
+#include<fstream>
+#include <sstream>
+
+void LoadImages(const std::string &strFile, std::vector<std::string> &vstrImageFilenames,
+        std::vector<std::string> &vstrDepthFilenames, std::vector<double> &vTimestamps);
+
+
+int main(int argc, char** argv) {
+  if (argc != 5) {
+    //std::cout << "Usage: qxLidarUpsampleTool [lidar_path image.pgm] [camera_path "
+                // "image.ppm] [save_folder] [crop y]\n";
+      std::cout << "Usage: qxLidarUpsampleTool [data_path] [associate.txt]"
+                   "[save_folder] [crop y]\n";
+                 return -1;
+  }
+    std::string data_path(argv[1]);
+    std::string associate(argv[2]);
+    std::string save_folder(argv[3]);
+    //切割 这个不动
+    int crop_y = std::stoi(argv[4]);
+
+  std::vector<std::string> vstrImageFilenames;
+  std::vector<std::string> vstrDepthFilenames;
+  std::vector<double> vTimestamps;
+  //string strFile = string(argv[1])+"/rgb.txt";
+  //std::string strFile = std::string("/home/yxli/dataset/liio")+"/rgb.txt";
+  //读文件开始了
+  LoadImages(associate, vstrImageFilenames,vstrDepthFilenames, vTimestamps);
+  int nImages = vstrImageFilenames.size();
+
+  for(int ni=0; ni<nImages; ni++) {
+  //这里面写你想干的事儿 别傻乎乎复制粘贴
+      std::string lidar_image=data_path+"/pgm/"+vstrDepthFilenames[ni]+".pgm";
+      std::string camera_image=data_path+"/ppm/"+vstrImageFilenames[ni]+".ppm";
+      std::string filename=vstrDepthFilenames[ni];
+      std::string out_depth1_path = save_folder + "/depth1/" + filename + ".ppm";
+      std::string out_depth2_path = save_folder + "/depth2/" + filename + ".ppm";
+      qx_lidar_upsample::LidarUpSample(lidar_image, camera_image, crop_y,
+                                       out_depth1_path, out_depth2_path);
+  }
+
+  return 0;
+}
+
+
+void LoadImages(const std::string &strFile, std::vector<std::string> &vstrImageFilenames,
+        std::vector<std::string> &vstrDepthFilenames, std::vector<double> &vTimestamps)
+{
+    std::ifstream f;
+    f.open(strFile.c_str());
+//如果需要跳几行就激活
+    // skip first three lines
+    //std::string s0;
+    //getline(f,s0);
+    //getline(f,s0);
+    //getline(f,s0);
+
+    while(!f.eof())
+    {
+        std::string s;
+        getline(f,s);
+        if(!s.empty())
+        {
+//注意txt中的空格不读的
+            std::stringstream ss;
+            ss << s;
+            std::string sRGB;
+            std::string sDepth;
+            std::string stemp;
+            ss >> sRGB;
+            vstrImageFilenames.push_back(sRGB);
+            ss >> stemp;
+            ss >> sDepth;
+            vstrDepthFilenames.push_back(sDepth);
+        }
+    }
+}
