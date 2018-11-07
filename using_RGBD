@@ -33,4 +33,11 @@ cd /home/yxli/roswork/pcd2depth/cmake-build-debug
 /home/yxli/roswork/Experimental_material/depth/ 
 /home/yxli/roswork/Experimental_material/img/
 
-#把深度点云图变成深度图
+#用杨老师代码把深度点云图变成深度图
+#自己改成循环读取的
+./build/qxLidarUpsampleTool 
+/home/yxli/roswork/Experimental_material/qx_test 
+/home/yxli/roswork/Experimental_material/qx_test/img_timestamps.txt 
+/home/yxli/roswork/Experimental_material/qx_test/opt_depth/ 
+500
+
