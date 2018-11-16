@@ -15,11 +15,11 @@ cd ~/apollo
 bash docker/canary/start.sh
 bash docker/canary/dev_into.sh
 
-#先用apollo做出来pcd图
+#先用apollo做出来pcd信息(注意bag包在文件夹中!!!不是写bag名字是写文件夹名字)
 apollo/scripts msf_simple_map_creator.sh
 bash scripts/msf_simple_map_creator.sh bazel-bin/modules/map/util/colored_pointcloud/optbag velodyne32_novatel_extrinsics_example.yaml 50 optmap/
 
-#提取出来车图片
+#提取出来rgb图片
 cd bazel-bin/modules/map/util/colored_pointcloud
 ./bag2image --bag_file 2018-10-11-14-33-15.bag --output_folder optpicture/
 
@@ -32,12 +32,35 @@ cd /home/yxli/roswork/pcd2depth/cmake-build-debug
 /home/yxli/roswork/Experimental_material/optpicture/img_timestamps.txt 
 /home/yxli/roswork/Experimental_material/depth/ 
 /home/yxli/roswork/Experimental_material/img/
+//还会产生一个img_timestamps.txt这就是后面的associate.txt
 
 #用杨老师代码把深度点云图变成深度图
-#自己改成循环读取的
+#我做了小修改
+#自己的版本在/home/yxli/dataset/qx_source
+qxLidarUpsampleTool [data_path] [associate.txt]" "[save_folder] [crop y]
 ./build/qxLidarUpsampleTool 
 /home/yxli/roswork/Experimental_material/qx_test 
 /home/yxli/roswork/Experimental_material/qx_test/img_timestamps.txt 
 /home/yxli/roswork/Experimental_material/qx_test/opt_depth/ 
 500
 
+//用cutimg把rgb图片裁剪成与depth图片一样的尺寸
+cd /home/yxli/roswork/cutimg
+"enter the [associate.txt] [data_path] [output_path]"
+
+//杨老师的深度图是ppm格式的转一下
+/home/yxli/roswork/ppm2png
+enter the [associate.txt] [data_path] [output_path]
+
+//把处理好的深度图和信息图按照TUM数据集格式放在一个文件夹下面
+/data
+  /depth
+  /rgb
+  associate.txt
+
+//运行ORBSLAM的RGBD模式 大功告成
+//注意yaml要用对应摄像头的 自己修改下问题不大
+/home/yxli/ORB_SLAM2-master/Vocabulary/ORBvoc.txt
+/home/yxli/roswork/Experimental_material/camera_short.yaml
+/home/yxli/roswork/Experimental_material/test
+/home/yxli/roswork/Experimental_material/test/img_timestamps.txt
