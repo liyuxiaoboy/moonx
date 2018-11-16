@@ -34,7 +34,7 @@ cd /home/yxli/roswork/pcd2depth/cmake-build-debug
 /home/yxli/roswork/Experimental_material/img/
 //还会产生一个img_timestamps.txt这就是后面的associate.txt
 
-#用杨老师代码把深度点云图变成深度图
+#用杨老师代码把稀疏深度点云图变成稠密深度图
 #我做了小修改
 #自己的版本在/home/yxli/dataset/qx_source
 qxLidarUpsampleTool [data_path] [associate.txt]" "[save_folder] [crop y]
