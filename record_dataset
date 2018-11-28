@@ -14,3 +14,32 @@ bash script/map_record.sh stop
 apollo/data/
 
 moonx123
+
+cd ~/apollo
+git fetch
+git checkout develop
+
+# 启动并进入docker，启动docker前插入移动硬盘，否则docker中无法识别
+bash docker/canary/start.sh
+bash docker/canary/dev_into.sh
+
+# 编译开发环境
+./apollo.sh build                    # 编译bazel相关模块
+./apollo.sh build_velodyne           # 编译velodyne驱动
+./apollo.sh build_usbcam             # 编译camera驱动
+
+source bazel-apollo/external/ros/setup.bash 
+
+# 启动 dreamview
+bash scripts/bootstrap.sh
+设置车辆启动项
+rosbag record 
+camera_short
+gnss/odometry
+gnss/best_pose
+gnss/gnss_status
+compensator/point_cloud2
+
+# 关闭 dreamview
+bash scripts/bootstrap.sh stop
+
