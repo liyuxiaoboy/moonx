@@ -1,3 +1,4 @@
+sudo chmod -R 777 /media/map_test/testbag
 #ssh复制
 scp local_file remote_username@remote_ip:remote_folder 
 
