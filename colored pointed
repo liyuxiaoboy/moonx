@@ -1,0 +1,10 @@
+#color map
+/apollo$ 
+bash ./scripts/msf_color_map_creator.sh 
+testbag/ 
+velodyne32_novatel_extrinsics_example.yaml 
+50 
+opt/ 
+modules/calibration/data/moonx_mkz_0001/camera_params/short_camera_extrinsics.yaml 
+modules/calibration/data/moonx_mkz_0001/camera_params/short_camera_intrinsics.yaml 
+40
