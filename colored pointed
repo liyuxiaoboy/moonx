@@ -1,10 +1,18 @@
+#检测障碍点 IN ssh
+bash host_scripts/msf_simple_map_creator.sh \
+/home/liyuxiao/lidetect \
+/media/map_test/testbag \
+/media/map_test/velodyne32_novatel_extrinsics_example.yaml \
+50 \
+/media/map_test/opt
+
 #color map
-/apollo$ 
+cd apollo 
 bash ./scripts/msf_color_map_creator.sh 
-testbag/ 
-velodyne32_novatel_extrinsics_example.yaml 
-50 
-opt/ 
-modules/calibration/data/moonx_mkz_0001/camera_params/short_camera_extrinsics.yaml 
-modules/calibration/data/moonx_mkz_0001/camera_params/short_camera_intrinsics.yaml 
+testbag/ \
+velodyne32_novatel_extrinsics_example.yaml \
+50 \
+opt/ \
+modules/calibration/data/moonx_mkz_0001/camera_params/short_camera_extrinsics.yaml \
+modules/calibration/data/moonx_mkz_0001/camera_params/short_camera_intrinsics.yaml \
 40
