@@ -1,3 +1,6 @@
+#ssh复制
+scp local_file remote_username@remote_ip:remote_folder 
+
 #检测障碍点 IN ssh
 bash host_scripts/msf_simple_map_creator.sh \
 /home/liyuxiao/lidetect \
