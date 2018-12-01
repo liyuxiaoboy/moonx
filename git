@@ -1,0 +1,56 @@
+git工作流
+
+
+添加feature
+
+git checkout develop
+git pull
+git checkout -b feature/#ISSUE-ID develop
+# 添加新的feature
+echo "- xxx onboard." >> onboard.md 
+git add .
+git commit -m "xxx onboard."
+# 上传feature分支并发起pull request, 等待review
+git push -u origin feature/#ISSUE-ID
+# 一旦pull request被reviewer接受了，拉取远程develop分支
+git pull origin develop
+git checkout develop
+# 合并/上传/删除feature分支
+git merge feature/#ISSUE-ID
+git push
+git branch -d feature/#ISSUE-ID
+
+release
+
+# 从develop创建release分支
+git checkout -b release-0.X develop
+# 完成release文档
+# 将release合并到master
+git checkout master
+git merge release-0.X
+git push
+# 将release合并到develop
+git checkout develop
+git merge release-0.X
+git push
+# 删除release分支
+git branch -d release-0.X
+# 添加tag
+git tag -a 0.X -m "xxxx release" master
+git push --tags
+
+修复bug
+
+# 从master创建hotfix分支
+git checkout -b hotfix/#ISSUE-ID develop
+# 修复bug: replace xxx as your name.
+# 合并到master分支
+git checkout master
+git merge hotfix/#ISSUE-ID 
+git push
+# 合并到develop分支
+git checkout develop
+git merge hotfix/#ISSUE-ID 
+git push
+# 删除hotfix分支
+git branch -D hotfix/#ISSUE-ID 
