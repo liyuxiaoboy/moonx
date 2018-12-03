@@ -22,7 +22,7 @@ bash host_scripts/msf_simple_map_creator.sh \
 
 #color map
 cd apollo 
-bash ./scripts/msf_color_map_creator.sh 
+bash ./scripts/msf_color_map_creator.sh \
 testbag/ \
 velodyne32_novatel_extrinsics_example.yaml \
 50 \
