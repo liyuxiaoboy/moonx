@@ -1,3 +1,13 @@
+#NAS
+sudo apt-get install nfs-common -y
+mkdir /media/NAS
+sudo mount 192.168.1.110:/data /media/NAS
+//也可以直接写到配置文件，避免每次开机手动挂载
+sudo su
+echo '192.168.1.110:/data                    /media/NAS        nfs     defaults,_netdev  0     0' >> /etc/fstab      ##_netdev 避免挂在失败而无法正常开机
+mount -a
+
+#ssh权限
 sudo chmod -R 777 /media/map_test/testbag
 #ssh复制
 scp local_file remote_username@remote_ip:remote_folder 
