@@ -30,4 +30,9 @@ opt/ \
 modules/calibration/data/moonx_mkz_0001/camera_params/short_camera_extrinsics.yaml \
 modules/calibration/data/moonx_mkz_0001/camera_params/short_camera_intrinsics.yaml \
 40
+#yolodetect
+#configure
+/home/yxli/apollo/modules/perception/model/yolo_camera_detector/config.pt
+#cpp
+/home/yxli/apollo/modules/perception/obstacle/camera/detector/yolo_camera_detector/yoloDetectObs.cc
 
