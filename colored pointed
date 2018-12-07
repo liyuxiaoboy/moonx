@@ -36,3 +36,4 @@ modules/calibration/data/moonx_mkz_0001/camera_params/short_camera_intrinsics.ya
 #cpp
 /home/yxli/apollo/modules/perception/obstacle/camera/detector/yolo_camera_detector/yoloDetectObs.cc
 
+./bin/colorPoints /home/yxli/02working/data/pcd_pose.txt /home/yxli/02working/data/image_pose.txt /home/yxli/02working/opt/pcd/ /home/yxli/02working/opt/img/ 20 
