@@ -43,3 +43,30 @@ compensator/point_cloud2
 # 关闭 dreamview
 bash scripts/bootstrap.sh stop
 
+/apollo/monitor/system_status                              22 msgs    : pb_msgs/SystemStatus             
+             /apollo/sensor/camera/traffic/image_long                 3448 msgs    : sensor_msgs/Image                
+             /apollo/sensor/camera/traffic/image_long/camera_info     3447 msgs    : sensor_msgs/CameraInfo           
+             /apollo/sensor/camera/traffic/image_short                3898 msgs    : sensor_msgs/Image                
+             /apollo/sensor/camera/traffic/image_short/camera_info    3897 msgs    : sensor_msgs/CameraInfo           
+             /apollo/sensor/gnss/best_pose                             139 msgs    : pb_msgs/GnssBestPose             
+             /apollo/sensor/gnss/corrected_imu                       13688 msgs    : pb_msgs/CorrectedImu             
+             /apollo/sensor/gnss/gnss_status                           139 msgs    : pb_msgs/GnssStatus               
+             /apollo/sensor/gnss/imu                                 27343 msgs    : pb_msgs/Imu                      
+             /apollo/sensor/gnss/ins_stat                              138 msgs    : pb_msgs/InsStat                  
+             /apollo/sensor/gnss/ins_status                              1 msg     : pb_msgs/InsStatus                
+             /apollo/sensor/gnss/odometry                            13689 msgs    : pb_msgs/Gps                      
+             /apollo/sensor/gnss/raw_data                            55600 msgs    : std_msgs/String                  
+             /apollo/sensor/gnss/rtcm_data                             276 msgs    : std_msgs/String                  
+             /apollo/sensor/gnss/rtk_eph                               270 msgs    : pb_msgs/GnssEphemeris            
+             /apollo/sensor/gnss/rtk_obs                               277 msgs    : pb_msgs/EpochObservation         
+             /apollo/sensor/gnss/stream_status                           1 msg     : pb_msgs/StreamStatus             
+             /apollo/sensor/velodyne32_2/PointCloud2                  1364 msgs    : sensor_msgs/PointCloud2          
+             /apollo/sensor/velodyne32_2/VelodyneScanUnified          1364 msgs    : velodyne_msgs/VelodyneScanUnified
+             /apollo/sensor/velodyne32_2/compensator/PointCloud2      1367 msgs    : sensor_msgs/PointCloud2          
+             /camera_long/camera_nodelet_manager/bond                  273 msgs    : bond/Status                       (2 connections)
+             /camera_short/camera_nodelet_manager/bond                 273 msgs    : bond/Status                       (2 connections)
+             /rosout                                                   899 msgs    : rosgraph_msgs/Log                 (17 connections)
+             /rosout_agg                                               882 msgs    : rosgraph_msgs/Log                
+             /tf                                                     13676 msgs    : tf2_msgs/TFMessage               
+             /tf_static                                                  6 msgs    : tf2_msgs/TFMessage                (6 connections)
+             /velodyne32_2_nodelet_manager/bond                        813 msgs    : bond/Status                       (4 connections)
