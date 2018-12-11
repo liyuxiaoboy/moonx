@@ -33,6 +33,7 @@ modules/calibration/data/moonx_mkz_0001/camera_params/short_camera_intrinsics.ya
 #yolodetect
 #configure
 /home/yxli/apollo/modules/perception/model/yolo_camera_detector/config.pt
+#注意这里要摆放好数据因为是单例的原因没有向里面传參
 #cpp
 /home/yxli/apollo/modules/perception/obstacle/camera/detector/yolo_camera_detector/yoloDetectObs.cc
 
