@@ -35,6 +35,12 @@ modules/calibration/data/moonx_mkz_0001/camera_params/short_camera_intrinsics.ya
 /home/yxli/apollo/modules/perception/model/yolo_camera_detector/config.pt
 #注意这里要摆放好数据因为是单例的原因没有向里面传參
 #cpp
-/home/yxli/apollo/modules/perception/obstacle/camera/detector/yolo_camera_detector/yoloDetectObs.cc
+/home/yxli/apollo/modules/perception/obstacle/camera/detector/yolo_camera_detector/yoloDetectObsv2.cc
 
+#处理txt文件
+#02working里面有py脚本
+
+
+#制作无障碍物的彩色点云
+#注意这里要看数据摆放位置
 ./bin/colorPoints /home/yxli/02working/data/pcd_pose.txt /home/yxli/02working/data/image_pose.txt /home/yxli/02working/opt/pcd/ /home/yxli/02working/opt/img/ 20 
