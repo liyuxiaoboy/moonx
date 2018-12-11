@@ -43,4 +43,13 @@ modules/calibration/data/moonx_mkz_0001/camera_params/short_camera_intrinsics.ya
 
 #制作无障碍物的彩色点云
 #注意这里要看数据摆放位置
-./bin/colorPoints /home/yxli/02working/data/pcd_pose.txt /home/yxli/02working/data/image_pose.txt /home/yxli/02working/opt/pcd/ /home/yxli/02working/opt/img/ 20 
+./bin/colorPoints \
+/home/yxli/02working/data/pcd_pose.txt \
+/home/yxli/02working/data/image_pose.txt \
+/home/yxli/02working/opt/pcd/ \
+/home/yxli/02working/opt/img/ \
+20 \
+
+./bazel-bin/modules/map/util/colored_pointcloud/merge_pointclouds \
+--
+
