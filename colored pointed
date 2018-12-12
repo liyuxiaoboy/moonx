@@ -57,7 +57,7 @@ python ioPose.py ../apollo/modules/perception/data/yolo_camera_detector_test/img
 #pcd_merge
 ./bazel-bin/modules/map/util/colored_pointcloud/merge_pointclouds \
 --pcd_files_folder testbag/pcd/ \
---pcd_poses_path testbag/2018-12-11-13-37-43/pcd/corrected_poses.txt \
+--pcd_poses_path testbag/2018-12-12-13-30-56/pcd/corrected_poses.txt \
 --output_pcd_path testbag/opt/merge.pcd \
 
 
