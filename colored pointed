@@ -42,7 +42,8 @@ modules/calibration/data/moonx_mkz_0001/camera_params/short_camera_intrinsics.ya
 
 #处理txt文件
 #02working里面有py脚本
-
+python ioPose.py ../apollo/testbag/2018-12-12-13-30-56/pcd/corrected_poses.txt data/pcd_pose.txt
+python ioPose.py ../apollo/modules/perception/data/yolo_camera_detector_test/img/corrected_poses.txt data/img_pose.txt
 
 #制作无障碍物的彩色点云
 #注意这里要看数据摆放位置
