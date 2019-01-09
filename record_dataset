@@ -6,9 +6,12 @@ git checkout map_record_49
 bash docker/canary/start.sh
 bash docker/canary/dev_into.sh
 bash script/map_record.sh build
+
+#begin roscore
+zd
+roscore
+
 bash script/map_record.sh start
-
-
 bash script/map_record.sh stop
 
 apollo/data/
