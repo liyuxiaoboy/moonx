@@ -46,7 +46,13 @@ python ioPose.py ../apollo/testbag/2018-12-12-13-30-56/pcd/corrected_poses.txt d
 python ioPose.py ../apollo/modules/perception/data/yolo_camera_detector_test/img/corrected_poses.txt data/img_pose.txt
 
 #处理pcd多重合并
+#cmake
 ./bin/pcd_merge data/pcd_pose.txt opt/
+#bazel
+./bazel-bin/modules/map/util/colored_pointcloud/pcd_merge \
+--pcd_files_folder testbag/pcd_old/ \
+--pcd_poses_path testbag/pcd_old/corrected_poses.txt \
+--output_pcd_path testbag/merge_pcd/
 
 #制作无障碍物的彩色点云cmake
 #注意这里要看数据摆放位置
