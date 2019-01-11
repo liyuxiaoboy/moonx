@@ -48,7 +48,7 @@ python ioPose.py ../apollo/modules/perception/data/yolo_camera_detector_test/img
 #处理pcd多重合并
 ./bin/pcd_merge data/pcd_pose.txt opt/
 
-#制作无障碍物的彩色点云
+#制作无障碍物的彩色点云cmake
 #注意这里要看数据摆放位置
 ./bin/colorPoints \
 /home/yxli/02working/data/pcd_pose.txt \
@@ -56,6 +56,16 @@ python ioPose.py ../apollo/modules/perception/data/yolo_camera_detector_test/img
 /home/yxli/02working/opt/pcd/ \
 /home/yxli/02working/opt/img/ \
 25 \
+#制作无障碍物的彩色点云bazel
+./bazel-bin/modules/map/util/colored_pointcloud/colored_pointcloud_no_obs \
+--pcd_poses_path testbag/pcd_old/corrected_poses.txt \
+--img_folder modules/perception/data/yolo_camera_detector_test/opt/ \
+--lidar_poses_at_img_time modules/perception/data/yolo_camera_detector_test/img/corrected_poses.txt \
+--lidar_cam_intrinsics testbag/yaml_dandi/short_camera_intrinsics.yaml \
+--lidar_cam_extrinsics testbag/yaml_dandi/lidar_camera_extrinsincs.yaml \
+--output_pcd_folder testbag/testopt/ \
+--range 0
+
 
 #pcd_merge
 ./bazel-bin/modules/map/util/colored_pointcloud/merge_pointclouds \
