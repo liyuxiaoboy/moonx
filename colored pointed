@@ -22,14 +22,15 @@ bash host_scripts/msf_simple_map_creator.sh \
 
 #color map
 cd apollo 
-bash ./scripts/msf_color_map_creator.sh \
-testbag/ \
-velodyne32_novatel_extrinsics_example.yaml \
-50 \
-opt/ \
+/apollo$ bash scripts/msf_color_map_creator.sh \
+night/ \                      
+modules/calibration/data/moonx_mkz_0001/velodyne_params/velodyne32_2_novatel_extrinsics.yaml \
+49 \
+night_opt/ \
 modules/calibration/data/moonx_mkz_0001/camera_params/short_camera_extrinsics.yaml \
 modules/calibration/data/moonx_mkz_0001/camera_params/short_camera_intrinsics.yaml \
-40
+50
+
 
 #yolodetect
 #configure
