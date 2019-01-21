@@ -40,3 +40,6 @@ $ rosrun pcl_ros bag_to_pcd data.bag /velodyne_points ./wtj
 (3)显示生成的pcd文件
 
 $pcl_viewer  1513648255448748.pcd
+
+查看frame_id
+rostopic echo /apollo/sensor/velodyne32_2/compensator/PointCloud2 | grep frame_id
