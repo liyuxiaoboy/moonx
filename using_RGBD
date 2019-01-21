@@ -17,7 +17,11 @@ bash docker/canary/dev_into.sh
 
 #先用apollo做出来pcd信息(注意bag包在文件夹中!!!不是写bag名字是写文件夹名字)
 apollo/scripts msf_simple_map_creator.sh
-bash scripts/msf_simple_map_creator.sh bazel-bin/modules/map/util/colored_pointcloud/optbag velodyne32_novatel_extrinsics_example.yaml 50 optmap/
+bash scripts/msf_simple_map_creator.sh 
+bazel-bin/modules/map/util/colored_pointcloud/optbag 
+velodyne32_novatel_extrinsics_example.yaml 
+50 
+optmap/
 
 #提取出来rgb图片
 cd bazel-bin/modules/map/util/colored_pointcloud
