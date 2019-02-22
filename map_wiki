@@ -1,0 +1,1 @@
+bash scripts/msf_simple_map_creator.sh 49 data/bag opt data/velodyne32_2_novatel_extrinsics.yaml
