@@ -4,12 +4,14 @@ bash docker/canary/star.sh
 bash docker/canary/dev_into.sh
 bash modules/drivers/pandora/build_and_install.sh
 bash apollo.sh build
-bash scripts/gps.sh 
-rosnode list
-rosnode list
-rostopic list
 source scripts/apollo_base.sh
 bash scripts/pandora_for_apollo.sh 
+
+# 启动 dreamview
+bash scripts/bootstrap.sh
+# 关闭 dreamview
+bash scripts/bootstrap.sh stop
+
 rostopic list
 rostopic hz /检查一下HZ对不对
 
