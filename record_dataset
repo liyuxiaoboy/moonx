@@ -13,9 +13,23 @@ bash scripts/pandora_for_apollo.sh
 rostopic list
 rostopic hz /检查一下HZ对不对
 
-rosbag record /apollo/sensor/pandora/camera/back_gray  /apollo/sensor/pandora/camera/left_gray    /apollo/sensor/pandora/camera/front_gray /apollo/sensor/pandora/camera/right_gray /apollo/sensor/pandora/hesai40_2/compensator/PointCloud2
+rosbag record 
+/apollo/sensor/pandora/camera/front_color
+/apollo/sensor/pandora/camera/back_gray  
+/apollo/sensor/pandora/camera/left_gray    
+/apollo/sensor/pandora/camera/front_gray 
+/apollo/sensor/pandora/camera/right_gray 
+/apollo/sensor/pandora/hesai40_2/compensator/PointCloud2
+/apollo/canbus/chassis                                                
+/apollo/monitor/static_info                                      
+/apollo/sensor/gnss/best_pose                                 
+/apollo/sensor/gnss/gnss_status                                 
+/apollo/sensor/gnss/ins_stat                                         
+/apollo/sensor/gnss/odometry                                         
+/apollo/sensor/pandora/hesai40_2/compensator/PointCloud2   
+/tf                                                        
+/tf_static
 
-https://github.com/NVIDIA/nvidia-docker/blob/master/README.md#quickstart
 
 //0001
 cd ~/apollo
