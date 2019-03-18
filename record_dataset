@@ -6,6 +6,9 @@ bash modules/drivers/pandora/build_and_install.sh
 bash apollo.sh build
 source scripts/apollo_base.sh
 bash scripts/pandora_for_apollo.sh 
+supervisorctl start gps
+scripts/pandora_for_apollo.sh start
+supervisorctl start canbus
 
 # 启动 dreamview
 bash scripts/bootstrap.sh
