@@ -1,2 +1,22 @@
-https://gitlab.moonx.cn/Developers/apollo/blob/develop/modules/tools/on_car_services/bag_record/bag_record.py
-https://gitlab.moonx.cn/Developers/apollo/tree/cyber_lfs/scripts
+//cyber start
+source /cyber/setup.bash
+
+//一个可视化窗口rviz
+cyber_visualizer
+
+// 对topic通道的实时监控
+cyber_monitor
+
+cyber_recorder
+usage: cyber_recorder <command>> [<args>]
+The cyber_recorder commands are:
+    info                               Show infomation of an exist record.
+    play                               Play an exist record.
+    record                             Record same topic.
+    split                              Split an exist record.
+    recover                            Recover an exist record.
+
+//将bag转换为record
+rosbag_to_record
+Usage:
+  rosbag_to_record input.bag output.record
