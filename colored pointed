@@ -80,4 +80,8 @@ python ioPose.py ../apollo/modules/perception/data/yolo_camera_detector_test/img
 --pcd_poses_path testbag/2018-12-12-13-11-42/pcd/corrected_poses.txt \
 --output_pcd_path testbag/opt/merge.pcd \
 
-
+#recolor
+UTM_ZONE=49UTM
+BAG_FOLDER=/apollo/data/bag
+CALIB_FILE=/apollo/modules/calibration/data/moonx_mkz_0003/pandora_params/hesai40_2_novatel_extrinsics.yaml
+BAG_FOLDER=/apollo/data/bag
