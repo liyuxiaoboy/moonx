@@ -84,4 +84,4 @@ python ioPose.py ../apollo/modules/perception/data/yolo_camera_detector_test/img
 UTM_ZONE=49UTM
 BAG_FOLDER=/apollo/data/bag
 CALIB_FILE=/apollo/modules/calibration/data/moonx_mkz_0003/pandora_params/hesai40_2_novatel_extrinsics.yaml
-BAG_FOLDER=/apollo/data/bag
+MAP_FOLDER=/apollo/data/opt
