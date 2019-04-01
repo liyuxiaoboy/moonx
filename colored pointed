@@ -81,7 +81,7 @@ python ioPose.py ../apollo/modules/perception/data/yolo_camera_detector_test/img
 --output_pcd_path testbag/opt/merge.pcd \
 
 #recolor
-UTM_ZONE=49UTM
+UTM_ZONE=49
 BAG_FOLDER=/apollo/data/bag
 CALIB_FILE=/apollo/modules/calibration/data/moonx_mkz_0003/pandora_params/hesai40_2_novatel_extrinsics.yaml
 MAP_FOLDER=/apollo/data/opt
