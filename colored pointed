@@ -85,3 +85,4 @@ UTM_ZONE=49UTM
 BAG_FOLDER=/apollo/data/bag
 CALIB_FILE=/apollo/modules/calibration/data/moonx_mkz_0003/pandora_params/hesai40_2_novatel_extrinsics.yaml
 MAP_FOLDER=/apollo/data/opt
+bash scripts/msf_simple_map_creator.sh $UTM_ZONE $BAG_FOLDER $MAP_FOLDER $CALIB_FILE
