@@ -54,3 +54,20 @@ git merge hotfix/#ISSUE-ID
 git push
 # 删除hotfix分支
 git branch -D hotfix/#ISSUE-ID 
+
+#kit 工作流
+ 2043  git log
+ 2044  git rebase -i b92d75e363f0c49951d799002fe4b6e57403f564
+ 2045  git status
+ 2046  git rebase --continue
+ 2047  git rebase -i b92d75e363f0c49951d799002fe4b6e57403f564
+ 2048  git rebase --abort
+ 2049  git log
+ 2050  git rebase -i bcad9f72e4fd5b75c04d88f314eb18cd516249a2
+ 2051  git config --global core.editor "vim"
+ 2052  git status
+ 2053  git log
+ 2054  git commit --amend
+ 2055  git branch
+ 2056  gt push origin cyber_record:cyber_record -f
+ 2057  git push origin cyber_record:cyber_record -f
