@@ -86,3 +86,10 @@ BAG_FOLDER=/apollo/data/bag
 CALIB_FILE=/apollo/modules/calibration/data/moonx_mkz_0003/pandora_params/hesai40_2_novatel_extrinsics.yaml
 MAP_FOLDER=/apollo/data/opt
 bash scripts/msf_simple_map_creator.sh $UTM_ZONE $BAG_FOLDER $MAP_FOLDER $CALIB_FILE
+
+./bazel-bin/modules/map/util/colored_pointcloud/recolor_pointcloud \
+--img_folder=/apollo/data/image \
+--calib_folder=/apollo/data/pandora_calib \
+--pose_list=/apollo/data/opt/pointcloud_map/poses_list.serial \
+--out_poses_list=/apollo/data/out_poses_list.serial \
+--out_color_poses_list=/apollo/data/out_color_poses_list.serial
