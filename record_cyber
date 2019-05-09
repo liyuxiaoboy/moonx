@@ -16,6 +16,18 @@ The cyber_recorder commands are:
     split                              Split an exist record.
     recover                            Recover an exist record.
 
+cyber_recorder record -c  \
+/apollo/canbus/chassis \
+/apollo/monitor/static_info \
+/apollo/sensor/camera/traffic/image_short \
+/apollo/sensor/gnss/best_pose \
+/apollo/sensor/gnss/gnss_status \
+/apollo/sensor/gnss/imu \
+/apollo/sensor/gnss/ins_stat \
+/apollo/sensor/gnss/odometry \
+/tf \
+/apollo/sensor/velodyne32/compensator/PointCloud2
+
 //将bag转换为record
 rosbag_to_record
 Usage:
